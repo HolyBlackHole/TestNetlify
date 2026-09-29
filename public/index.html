@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netlify 部署测试站</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --line: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #26c2b9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      background: radial-gradient(1200px 600px at 50% -10%, #1b2a4a 0%, var(--bg) 60%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 32px; }
+    h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 1px; }
+    .sub { color: var(--muted); font-size: 15px; }
+    .badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 14px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 13px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 17px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h2::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 15px;
+    }
+    .row:last-child { border-bottom: none; }
+    .row .k { color: var(--muted); }
+    .row .v { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    #version { color: var(--accent); font-weight: 700; }
+    ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; font-size: 15px; }
+    code {
+      background: #0b1220;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: #7dd3fc;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Netlify 部署测试站</h1>
+      <div class="sub">每次 push 后刷新本页，若下方版本号变了，说明自动部署已生效</div>
+      <div class="badge">Static Site · Netlify</div>
+    </header>
+
+    <div class="card">
+      <h2>部署自检</h2>
+      <div class="row"><span class="k">站点版本</span><span class="v" id="version">VERSION_PLACEHOLDER</span></div>
+      <div class="row"><span class="k">页面加载时间</span><span class="v" id="loaded">--</span></div>
+      <div class="row"><span class="k">当前地址</span><span class="v" id="host">--</span></div>
+      <div class="row"><span class="k">协议</span><span class="v" id="proto">--</span></div>
+    </div>
+
+    <div class="card">
+      <h2>怎么用它验证部署</h2>
+      <ol>
+        <li>把本目录内容推到 GitHub 仓库的 <code>public/</code>，或直接放仓库根目录并改 <code>netlify.toml</code>。</li>
+        <li>在 Netlify 连接该仓库，Build command 留空，Publish directory 填 <code>public</code>。</li>
+        <li>部署成功后，把 <code>public/index.html</code> 里的版本号改成 <code>v2</code> 再 push 一次。</li>
+        <li>等 Netlify 构建完成（一两分钟内），刷新线上页面：版本号变成 <code>v2</code> 即表示 CD 打通。</li>
+      </ol>
+    </div>
+
+    <footer>纯静态页面，无外部依赖，可直接部署到 Netlify Pages / CDN</footer>
+  </div>
+
+  <script>
+    var SITE_VERSION = "v1-2026-09-29";
+
+    document.getElementById("version").textContent = SITE_VERSION;
+    document.getElementById("loaded").textContent = new Date().toLocaleString("zh-CN");
+    document.getElementById("host").textContent = location.host || "(本地打开)";
+    document.getElementById("proto").textContent = location.protocol.replace(":", "");
+  </script>
+</body>
+</html>

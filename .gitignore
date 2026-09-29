@@ -1,0 +1,19 @@
+# 编辑器 / IDE
+.idea/
+.vscode/
+*.iml
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# 依赖与构建产物
+node_modules/
+dist/
+.netlify/
+
+# 系统文件
+.DS_Store
+Thumbs.db

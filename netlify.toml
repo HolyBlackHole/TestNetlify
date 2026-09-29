@@ -1,0 +1,11 @@
+# Netlify 部署配置（放在仓库根目录）
+# 纯静态站点：无需构建命令，直接发布 public 目录
+
+[build]
+  publish = "public"
+
+# 如果你把 index.html 直接放在仓库根目录，请改用：
+# [build]
+#   publish = "."
+
+# 站点是单页静态站，未命中的路径交给自定义 404 页面
